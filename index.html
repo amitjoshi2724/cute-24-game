@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple 24-Point Card Game</title>
+  <meta name="description" content="Classic 24-point card game ported from Java Swing to HTML5/CSS/JavaScript with identical UI and gameplay.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/c1.gif">
+</head>
+<body>
+  <div class="desktop-container">
+    <!-- Retro App Window -->
+    <div class="app-window" id="app-window">
+      <!-- Title Bar -->
+      <div class="window-titlebar">
+        <div class="window-controls">
+          <span class="control-btn close"></span>
+          <span class="control-btn minimize"></span>
+          <span class="control-btn zoom"></span>
+        </div>
+        <div class="window-title">Simple 24-Point Card Game</div>
+        <div class="window-spacer"></div>
+      </div>
+
+      <!-- Main Game Canvas / Panel (Matches Java Swing ProgrammingExercise22_13Panel) -->
+      <div class="game-panel" id="game-panel">
+        <!-- North: Refresh Button in top right -->
+        <div class="panel-north">
+          <button id="refresh-btn" class="swing-btn refresh-btn" type="button">Refresh</button>
+        </div>
+
+        <!-- Center: 4 Playing Cards -->
+        <div class="panel-center" id="card-container">
+          <div class="card-slot" id="card-slot-0" style="left: 10px; top: 60px;">
+            <img id="card-img-0" class="card-image" alt="Card 1" src="images/flippedcard.gif">
+          </div>
+          <div class="card-slot" id="card-slot-1" style="left: 210px; top: 60px;">
+            <img id="card-img-1" class="card-image" alt="Card 2" src="images/flippedcard.gif">
+          </div>
+          <div class="card-slot" id="card-slot-2" style="left: 410px; top: 60px;">
+            <img id="card-img-2" class="card-image" alt="Card 3" src="images/flippedcard.gif">
+          </div>
+          <div class="card-slot" id="card-slot-3" style="left: 610px; top: 60px;">
+            <img id="card-img-3" class="card-image" alt="Card 4" src="images/flippedcard.gif">
+          </div>
+        </div>
+
+        <!-- South: Input and Verify Flow Container -->
+        <div class="panel-south">
+          <label for="expression-input" class="expression-label">Enter an expression: </label>
+          <input type="text" id="expression-input" class="expression-input" autocomplete="off" spellcheck="false" autofocus>
+          <button id="verify-btn" class="swing-btn verify-btn" type="button">Verify</button>
+        </div>
+      </div>
+
+      <!-- Swing JOptionPane Dialog (Hidden by default) -->
+      <div class="dialog-overlay" id="dialog-overlay">
+        <div class="swing-dialog" id="swing-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+          <div class="dialog-titlebar">
+            <span class="dialog-title" id="dialog-title">Message</span>
+            <button type="button" class="dialog-close" id="dialog-close" aria-label="Close">✕</button>
+          </div>
+          <div class="dialog-content">
+            <div class="dialog-icon" id="dialog-icon">
+              <!-- Info Circle Icon -->
+              <svg width="32" height="32" viewBox="0 0 32 32">
+                <circle cx="16" cy="16" r="14" fill="#0277bd" />
+                <text x="16" y="22" font-family="'Times New Roman', serif" font-weight="bold" font-style="italic" font-size="20" fill="#ffffff" text-anchor="middle">i</text>
+              </svg>
+            </div>
+            <div class="dialog-message" id="dialog-message">Correct</div>
+          </div>
+          <div class="dialog-actions">
+            <button type="button" class="swing-btn dialog-ok-btn" id="dialog-ok-btn">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tasteful Desktop Footer / Info -->
+    <div class="desktop-footer">
+      <div class="footer-info">
+        <span class="repo-badge">cute-24-game</span>
+        <span class="footer-dot">•</span>
+        <span class="footer-text">Ported from 2015 Java Swing</span>
+        <span class="footer-dot">•</span>
+        <button id="mascot-toggle-btn" class="mascot-toggle-btn" title="Toggle Animal Mascots">🐾 Animals</button>
+      </div>
+
+      <!-- Mascot Popup / Tray -->
+      <div id="mascot-tray" class="mascot-tray hidden">
+        <div class="mascot-item">
+          <img src="images/tortoise.gif" alt="Tortoise" class="mascot-img">
+          <span>Tortoise</span>
+        </div>
+        <div class="mascot-item">
+          <img src="images/hare.jpg" alt="Hare" class="mascot-img">
+          <span>Hare</span>
+        </div>
+        <div class="mascot-item">
+          <img src="images/turtle.jpg" alt="Turtle" class="mascot-img">
+          <span>Turtle</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio-tada" src="images/tada.wav" preload="auto"></audio>
+  <script src="app.js"></script>
+</body>
+</html>
