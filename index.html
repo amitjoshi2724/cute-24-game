@@ -78,29 +78,47 @@
       </div>
     </div>
 
-    <!-- Tasteful Desktop Footer / Info -->
-    <div class="desktop-footer">
-      <div class="footer-info">
-        <span class="repo-badge">cute-24-game</span>
-        <span class="footer-dot">•</span>
-        <span class="footer-text">Ported from 2015 Java Swing</span>
-        <span class="footer-dot">•</span>
-        <button id="mascot-toggle-btn" class="mascot-toggle-btn" title="Toggle Animal Mascots">🐾 Animals</button>
+    <!-- Prominent Mascot Squad Bar -->
+    <div class="mascot-section" id="mascot-section">
+      <div class="mascot-header">
+        <div class="mascot-title-group">
+          <span class="mascot-badge">🐾 cute-24-game mascots</span>
+          <span class="mascot-subtitle">Cheering you on to 24!</span>
+        </div>
+        <button id="mascot-toggle-btn" class="mascot-toggle-btn" type="button">Hide Animals ▲</button>
       </div>
 
-      <!-- Mascot Popup / Tray -->
-      <div id="mascot-tray" class="mascot-tray hidden">
-        <div class="mascot-item">
-          <img src="images/tortoise.gif" alt="Tortoise" class="mascot-img">
-          <span>Tortoise</span>
+      <div class="mascot-cards" id="mascot-cards">
+        <div class="mascot-card" id="mascot-tortoise" title="Click me!">
+          <div class="mascot-img-wrap">
+            <img src="images/tortoise.gif" alt="Tortoise" class="mascot-hero-img">
+          </div>
+          <span class="mascot-name">🐢 Tortoise</span>
+          <span class="mascot-speech">Slow & steady!</span>
         </div>
-        <div class="mascot-item">
-          <img src="images/hare.jpg" alt="Hare" class="mascot-img">
-          <span>Hare</span>
+
+        <div class="mascot-card" id="mascot-hare" title="Click me!">
+          <div class="mascot-img-wrap">
+            <img src="images/hare.jpg" alt="Hare" class="mascot-hero-img">
+          </div>
+          <span class="mascot-name">🐇 Hare</span>
+          <span class="mascot-speech">Speedy math!</span>
         </div>
-        <div class="mascot-item">
-          <img src="images/turtle.jpg" alt="Turtle" class="mascot-img">
-          <span>Turtle</span>
+
+        <div class="mascot-card" id="mascot-turtle" title="Click me!">
+          <div class="mascot-img-wrap">
+            <img src="images/turtle.jpg" alt="Turtle" class="mascot-hero-img">
+          </div>
+          <span class="mascot-name">🌊 Turtle</span>
+          <span class="mascot-speech">Swimming along!</span>
+        </div>
+
+        <div class="mascot-card" id="mascot-tree" title="Click me!">
+          <div class="mascot-img-wrap">
+            <img src="images/tree.jpg" alt="Tree" class="mascot-hero-img">
+          </div>
+          <span class="mascot-name">🌳 Finish Line</span>
+          <span class="mascot-speech">Target: 24!</span>
         </div>
       </div>
     </div>

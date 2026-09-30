@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const dialogClose = document.getElementById("dialog-close");
   const audioTada = document.getElementById("audio-tada");
   const mascotToggleBtn = document.getElementById("mascot-toggle-btn");
-  const mascotTray = document.getElementById("mascot-tray");
+  const mascotCards = document.getElementById("mascot-cards");
 
   // Game state (matching Java Swing variables)
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "j", "q", "k"];
@@ -206,11 +206,20 @@ document.addEventListener("DOMContentLoaded", () => {
     dialogOverlay.classList.add("active");
     dialogOkBtn.focus();
 
-    if (isCorrect && audioTada) {
-      try {
-        audioTada.currentTime = 0;
-        audioTada.play().catch(() => {});
-      } catch (e) {}
+    if (isCorrect) {
+      // Cheer animation for mascots!
+      const cards = document.querySelectorAll(".mascot-card");
+      cards.forEach(card => {
+        card.classList.add("cheer");
+        setTimeout(() => card.classList.remove("cheer"), 1400);
+      });
+
+      if (audioTada) {
+        try {
+          audioTada.currentTime = 0;
+          audioTada.play().catch(() => {});
+        } catch (e) {}
+      }
     }
   }
 
@@ -284,23 +293,38 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Mascot toggle
-  if (mascotToggleBtn && mascotTray) {
+  if (mascotToggleBtn && mascotCards) {
     mascotToggleBtn.addEventListener("click", () => {
-      mascotTray.classList.toggle("hidden");
+      const isHidden = mascotCards.classList.toggle("hidden");
+      mascotToggleBtn.textContent = isHidden ? "Show Animals ▼" : "Hide Animals ▲";
     });
   }
+
+  // Mascot click quotes
+  const quotes = {
+    "mascot-tortoise": ["Slow & steady!", "Patience makes 24!", "Keep plodding!"],
+    "mascot-hare": ["Speedy math!", "Hop to 24!", "Fast calculations!"],
+    "mascot-turtle": ["Swimming along!", "Smooth operator!", "Dive into the numbers!"],
+    "mascot-tree": ["Finish line!", "Target: 24!", "You can do it!"]
+  };
+
+  document.querySelectorAll(".mascot-card").forEach(card => {
+    card.addEventListener("click", () => {
+      card.classList.remove("cheer");
+      void card.offsetWidth; // trigger reflow
+      card.classList.add("cheer");
+      setTimeout(() => card.classList.remove("cheer"), 1200);
+
+      const speech = card.querySelector(".mascot-speech");
+      const list = quotes[card.id];
+      if (speech && list) {
+        const nextQuote = list[Math.floor(Math.random() * list.length)];
+        speech.textContent = nextQuote;
+      }
+    });
+  });
 
   // Initial deal
   dealCards();
   expressionInput.focus();
-
-  // Test parameter hook for visual verification
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get("test") === "correct") {
-    showDialog("Correct", false);
-  } else if (urlParams.get("test") === "incorrect") {
-    showDialog("Incorrect result", false);
-  } else if (urlParams.get("test") === "mascot") {
-    mascotTray.classList.remove("hidden");
-  }
 });
