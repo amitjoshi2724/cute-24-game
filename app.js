@@ -327,4 +327,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial deal
   dealCards();
   expressionInput.focus();
+
+  // Service Worker Registration for 100% Offline PWA Play
+  if ('serviceWorker' in navigator && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('[PWA] 24 Game ServiceWorker registered with scope:', reg.scope))
+        .catch(err => console.warn('[PWA] ServiceWorker registration error:', err));
+    });
+  }
 });

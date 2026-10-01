@@ -54,6 +54,48 @@ The user interface, card assets, typography (`Times New Roman 24px`), buttons, l
 
 ---
 
+
+---
+
+## 📲 Install as an App & Play Offline (Mac, iOS & Android)
+
+**Cute 24 Game** is built as a full **Progressive Web App (PWA)** powered by a dedicated **Service Worker (`sw.js`)** and Web App Manifest (`manifest.json`). 
+
+Once installed to your desktop or smartphone:
+- ✈️ **100% Offline Playable:** All game logic, card graphics, Shunting-Yard parser, and retro UI styles are pre-cached directly to persistent device storage via the **Cache Storage API**. You can play in Airplane Mode with zero Wi-Fi or cellular data anytime, anywhere.
+- 🖥️ **Native Standalone Window:** Launches in its own dedicated window without browser address bars, URL fields, or tabs.
+- 🔄 **Zero-Hassle Background Updates:** When you connect to Wi-Fi, the Service Worker automatically fetches and updates any new changes pushed to GitHub.
+
+### 🍎 Mac (macOS Desktop App)
+
+You can install **Cute 24 Game** directly as a native macOS desktop application with its own dedicated window, Dock icon, and full offline support:
+
+#### Method A: Safari (macOS Sonoma / Sequoia or newer)
+1. Open **[https://amitjoshi2724.github.io/cute-24-game/](https://amitjoshi2724.github.io/cute-24-game/)** in **Safari**.
+2. In the top menu bar, click **File** > **Add to Dock...** (or click the **Share** button in the Safari toolbar and select **Add to Dock**).
+3. Name it **Cute 24 Game** and click **Add**.
+4. The game is saved to your `Applications` folder and pinned to your **macOS Dock**.
+5. Launch it like any native Mac app—it runs in its own window without browser tabs or address bars, supports full keyboard controls, and is 100% playable offline!
+
+#### Method B: Google Chrome, Brave, or Microsoft Edge
+1. Open **[https://amitjoshi2724.github.io/cute-24-game/](https://amitjoshi2724.github.io/cute-24-game/)** in **Chrome**, **Brave**, or **Edge**.
+2. Click the **Install Cute 24 Game** icon in the right side of the address/URL bar (or go to **Settings (⋮)** > **Save and share** > **Install Cute 24 Game...**).
+3. Click **Install**.
+4. The game opens in its own standalone desktop window and is added to your Mac's **Launchpad**, **Spotlight**, and `~/Applications/Chrome Apps` folder.
+
+### 🍏 iPhone & iPad (iOS Safari)
+1. Open **[https://amitjoshi2724.github.io/cute-24-game/](https://amitjoshi2724.github.io/cute-24-game/)** in **Safari**.
+2. Tap the **Share** button at the bottom of the screen (the square with an arrow pointing upward).
+3. Scroll down the share sheet and tap **"Add to Home Screen"**.
+4. Tap **Add** in the top-right corner. A dedicated 24 Game icon will appear on your home screen.
+5. Tap the new icon once while online to let the Service Worker cache all assets—after that, it is permanently playable offline!
+
+### 🤖 Android (Google Chrome)
+1. Open **[https://amitjoshi2724.github.io/cute-24-game/](https://amitjoshi2724.github.io/cute-24-game/)** in **Google Chrome**.
+2. Tap the **three-dots menu (⋮)** in the top-right corner.
+3. Tap **"Install app"** (or **"Add to Home screen"**).
+4. Tap **Install** on the prompt. The game will install directly to your home screen and app drawer as an offline-ready arcade app.
+
 ## 🛠️ Original Java Source
 
 The original Java Swing source file is preserved in this repository:
