@@ -15,6 +15,96 @@ document.addEventListener("DOMContentLoaded", () => {
   const audioTada = document.getElementById("audio-tada");
   const mascotToggleBtn = document.getElementById("mascot-toggle-btn");
   const mascotCards = document.getElementById("mascot-cards");
+  const mascotSection = document.getElementById("mascot-section");
+  const windowScaler = document.getElementById("window-scaler");
+
+  // Dynamic Viewport Scaler (matching Spaceship Flight & Balloon World technique)
+  // Dynamically uses visualViewport width and height to fit 100% inside vertical or horizontal screens
+  const BASE_W = 800;
+  const BASE_H = 504;
+
+  function resizeToViewport() {
+    const screenW = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+    const screenH = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+
+    // Desktop view with ample headroom: native 1.0 scale
+    if (screenW >= 840 && screenH >= 720) {
+      document.documentElement.style.setProperty("--game-scale", "1");
+      if (windowScaler) {
+        windowScaler.style.width = BASE_W + "px";
+        windowScaler.style.height = BASE_H + "px";
+      }
+      if (mascotSection) {
+        mascotSection.style.display = "flex";
+      }
+      return;
+    }
+
+    // Constrained / Mobile screens:
+    const paddingX = 8;
+    const paddingY = 8;
+    const availW = Math.max(140, screenW - paddingX);
+    const availH = Math.max(140, screenH - paddingY);
+
+    // If landscape (screenW > screenH) or short height (< 560px), hide mascots to guarantee game is 100% visible
+    if (screenW > screenH || screenH < 560) {
+      if (mascotSection) {
+        mascotSection.style.display = "none";
+      }
+      const scaleW = availW / BASE_W;
+      const scaleH = availH / BASE_H;
+      const scale = Math.min(scaleW, scaleH, 1.0);
+
+      document.documentElement.style.setProperty("--game-scale", scale.toFixed(4));
+      if (windowScaler) {
+        windowScaler.style.width = Math.floor(BASE_W * scale) + "px";
+        windowScaler.style.height = Math.floor(BASE_H * scale) + "px";
+      }
+      return;
+    }
+
+    // Portrait mobile mode (screenH >= screenW):
+    let scaleW = Math.min(availW / BASE_W, 1.0);
+    let gameH = Math.floor(BASE_H * scaleW);
+    let remainingH = availH - gameH;
+
+    // If remaining height is plenty (>= 160px), keep mascots visible and scale nicely
+    if (remainingH >= 160) {
+      if (mascotSection) {
+        mascotSection.style.display = "flex";
+      }
+      const scaleH = Math.max(0.2, (availH - 150) / BASE_H);
+      const scale = Math.min(scaleW, scaleH, 1.0);
+      document.documentElement.style.setProperty("--game-scale", scale.toFixed(4));
+      if (windowScaler) {
+        windowScaler.style.width = Math.floor(BASE_W * scale) + "px";
+        windowScaler.style.height = Math.floor(BASE_H * scale) + "px";
+      }
+    } else {
+      // Remaining height is too tight (e.g. keyboard open or compact phone), hide mascots
+      if (mascotSection) {
+        mascotSection.style.display = "none";
+      }
+      const scaleH = availH / BASE_H;
+      const scale = Math.min(scaleW, scaleH, 1.0);
+      document.documentElement.style.setProperty("--game-scale", scale.toFixed(4));
+      if (windowScaler) {
+        windowScaler.style.width = Math.floor(BASE_W * scale) + "px";
+        windowScaler.style.height = Math.floor(BASE_H * scale) + "px";
+      }
+    }
+  }
+
+  window.addEventListener("resize", resizeToViewport, { passive: true });
+  window.addEventListener("orientationchange", () => {
+    setTimeout(resizeToViewport, 50);
+    setTimeout(resizeToViewport, 200);
+  });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", resizeToViewport);
+    window.visualViewport.addEventListener("scroll", resizeToViewport);
+  }
+  resizeToViewport();
 
   // Game state (matching Java Swing variables)
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "j", "q", "k"];
@@ -234,7 +324,9 @@ document.addEventListener("DOMContentLoaded", () => {
     expressionInput.value = "";
     operandStackCheck = [];
     dealCards();
-    expressionInput.focus();
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      expressionInput.focus();
+    }
   }
 
   // Verify handler matching VerifyListener
@@ -287,7 +379,9 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           expressionInput.value += val;
         }
-        expressionInput.focus();
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+          expressionInput.focus();
+        }
       });
     }
   }
@@ -326,7 +420,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial deal
   dealCards();
-  expressionInput.focus();
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    expressionInput.focus();
+  }
 
   // Service Worker Registration for 100% Offline PWA Play
   if ('serviceWorker' in navigator && (window.location.protocol === 'http:' || window.location.protocol === 'https:')) {

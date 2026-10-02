@@ -3,7 +3,7 @@
  * Provides 100% offline gameplay, persistent asset caching, and background updates.
  */
 
-const CACHE_NAME = 'cute-24-game-v1.0.0';
+const CACHE_NAME = 'cute-24-game-v1.0.1';
 const CORE_ASSETS = [
   './',
   './index.html',
