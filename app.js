@@ -153,6 +153,13 @@ document.addEventListener("DOMContentLoaded", () => {
       let cardImg = document.getElementById(`card-img-${j}`);
       cardImg.src = `images/${cardName}.gif`;
       cardImg.alt = `${cardNumber} of ${cardBook}`;
+
+      let cardSlot = document.getElementById(`card-slot-${j}`);
+      if (cardSlot) {
+        cardSlot.classList.remove("dealt");
+        void cardSlot.offsetWidth;
+        cardSlot.classList.add("dealt");
+      }
     }
     console.log("Current solution values:", solutionArray);
   }

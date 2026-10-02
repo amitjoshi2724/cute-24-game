@@ -150,6 +150,8 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  z-index: 20;
+  pointer-events: auto;
 }
 
 /* Swing Buttons: Refresh & Verify */
@@ -168,6 +170,8 @@ body {
   line-height: 1.2;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .swing-btn:hover {
@@ -178,17 +182,26 @@ body {
 .swing-btn:active {
   background: linear-gradient(180deg, #d8d8d8 0%, #e0e0e0 50%, #ededed 100%);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+  transform: translateY(1px);
 }
 
 .refresh-btn {
   min-width: 119px;
   height: 37px;
   margin-right: 0;
+  position: relative;
+  z-index: 25;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .verify-btn {
   min-width: 107px;
   height: 37px;
+  position: relative;
+  z-index: 25;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 /* Center: 4 Playing Cards */
@@ -198,7 +211,13 @@ body {
   left: 0;
   width: 800px;
   height: 472px;
-  pointer-events: auto;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes cardDeal {
+  0% { transform: translateY(-8px) scale(0.96); opacity: 0.7; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
 }
 
 .card-slot {
@@ -206,9 +225,14 @@ body {
   width: 160px;
   height: 240px;
   cursor: pointer;
+  pointer-events: auto;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.card-slot.dealt {
+  animation: cardDeal 0.22s ease-out;
 }
 
 .card-slot:hover {
@@ -242,6 +266,8 @@ body {
   align-items: center;
   gap: 5px;
   padding: 0;
+  z-index: 20;
+  pointer-events: auto;
 }
 
 .expression-label {
